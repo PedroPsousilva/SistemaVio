@@ -1,4 +1,4 @@
-let users = [];
+const connect = require("../db/connect");
 
 module.exports = class userController {
   static async createUser(req, res) {
@@ -9,34 +9,43 @@ module.exports = class userController {
         .status(400)
         .json({ error: "Todos os campos devem ser preenchidos" });
     } else if (isNaN(cpf) || cpf.length !== 11) {
-      return res
-        .status(400)
-        .json({
-          error: "CPF inválido. Deve conter exatamente 11 dígitos numéricos",
-        });
+      return res.status(400).json({
+        error: "CPF inválido. Deve conter exatamente 11 dígitos numéricos",
+      });
     } else if (!email.includes("@")) {
       return res.status(400).json({ error: "Email inválido. Deve conter @" });
+    } else {
+      // construção da query INSERT
+      const query = `INSERT INTO usuario(cpf , email , password , name) VALUES('${cpf}','${email}', ${password},'${name}' )`;
+      //Executando a query criada
+      try {
+        connect.query(query, function (err) {
+          if (err) {
+            console.log(err);
+            console.log(err.code);
+            if (err.code === "ER_DUP_ENTRY") {
+              return res
+                .status(400)
+                .json({ error: "O Email ja esta vinculado a outro usuario" });
+            } else {
+              return res
+                .status(500)
+                .json({ error: "Erro interno no servidor" });
+            }
+         } else {
+            return res
+              .status(201)
+              .json({ message: "Usuario criado com sucesso" });
+          }
+        });
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Erro interno do servidor" });
+      }
     }
-
-    // Verifica se já existe um usuário com o mesmo CPF
-    const existingUser = users.find((user) => user.cpf === cpf);
-    if (existingUser) {
-      return res.status(400).json({ error: "CPF já cadastrado" });
-    }
-
-    // Cria e adiciona novo usuário
-    const newUser = { cpf, email, password, name };
-    users.push(newUser);
-
-    return res
-      .status(201)
-      .json({ message: "Usuário criado com sucesso", user: newUser });
   }
-
   static async getAllUsers(req, res) {
-    return res
-      .status(200)
-      .json({ message: "Obtendo todos os usuários", users });
+    return res.status(200).json({ message: "Obtendo todos os usuários" });
   }
 
   static async updateUser(req, res) {

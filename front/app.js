@@ -44,12 +44,13 @@ document
         //Executa a resposta de sucesso - retorna ao usuario final
 
         //Exibe um alertapara o usuario final(front) com o nome do usuario que acabou de ser cadastrado
-        alert("Usuario cadastrado com sucesso!" + data.user.name);
+        //alert("Usuario cadastrado com sucesso!" + data.user.name);
+        alert(data.message);
 
         //Exibe o log no terminal
         console.log("Usuario criado: ", data.user);
 
-        //Reseta os campos do formularioapos o sucesso do cadastro 
+        //Reseta os campos do formularioapos o sucesso do cadastro
 
         document.getElementById("formulario-registro").reset();
       })
@@ -62,3 +63,5 @@ document
         console.error("Erro:", error.message);
       });
   });
+
+  
