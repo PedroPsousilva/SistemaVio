@@ -1,16 +1,21 @@
-const router = require("express").Router();
+const router = require('express').Router()
 
-const userController = require("../controllers/userController");
-const orgController = require("../controllers/orgController");
+const { route } = require('..');
+const userController = require("../controllers/userController")
+const orgController = require("../controllers/orgController")
 
-router.post("/user", userController.createUser);
-//router.get("/user", userController.getAllUsers);
-//router.put('/user',userController.updateUser);
-//router.delete('/user:cpf', userController.deleteUser);
+router.post('/user', userController.createUser);
+//router.post('user/login', userController.postLogin);
+router.get('/user', userController.getAllUsers);
+//router.get('/user/:cpf', userController.gerUserById); 
+router.put('/user', userController.updateUser);
+router.delete('/user/:id', userController.deleteUser);
 
-router.post('/organizador', orgController.createOrg);
-//router.get('/organizador', orgController.getAllOrganizadores);
-//router.put('/organizador', orgController.updateOrganizador);
-//router.delete('/organizador/:id', orgController.deleteOrganizador);
+router.post('/organizador', orgController.createOrganizador);
+router.get('/organizador', orgController.getAllOrganizadores);
+router.put('/organizador', orgController.updateOrganizador);
+router.delete('/organizador/:id', orgController.deleteOrganizador);
 
-module.exports = router;
+
+
+module.exports = router
