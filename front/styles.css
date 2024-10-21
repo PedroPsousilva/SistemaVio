@@ -114,3 +114,17 @@ footer {
   position: absolute; /* Posiciona o rodapé de forma absoluta */
   bottom: 0; /* Posiciona o rodapé na parte inferior da página */
 }
+
+#user-list{
+  
+  text-align: center; 
+  color: crimson; /* Cor específica para o título da seção 'home' */
+  font-weight: bold; /* Texto em negrito */
+}
+h2-ul{
+  justify-content: center;
+  color: #afd8de;
+  text-align: center;
+
+
+}
