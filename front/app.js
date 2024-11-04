@@ -1,82 +1,80 @@
-  //Adiciona o ouvinte de evento (submit)para capturar o envio do formulario
+// acessa o objeto 'document' que representa a pagina html
 
-//document.addEventListener("DOMContentLoaded");
+// document.addEventListener("DOMContentLoaded");
 
-//Chamada da função "createUser" para associação ao evento de envio do formulario
-document.getElementById("formulario-registro").addEventListener("submit", createUser);
+// chamada da função 'createUser' para a associação ao evento de envio do fromulário
+document
+  .getElementById("formulario-registro")
+  .addEventListener("submit", createUser);
 
-document.addEventListener("DOMContentLoaded",getAllUsers);
+document.addEventListener("DOMContentLoaded", getAllUsers);
 
+document.addEventListener("DOMContentLoaded", getAllUsersTable);
+
+document.addEventListener("DOMContentLoaded", getAllOrgsTable);
 
 function createUser(event) {
-  //previne o comportamento padrao do formulario,ou seja, impede que ele seja enviado e recarregue a pagina
-  event.preventDefault();
-
-  //Captura os valores dos campos do formulario
-
-  const name = document.getElementById("nome").value;
+  // adiciona o ouvinte do evento 'submit'
+  event.preventDefault(); // previne o comportamento padrão do formulário, ou seja, impede que ele seja enviado e recarregue a página
+  const name = document.getElementById("nome").value; // capturar os valores dos campos do formulário pelo id
   const cpf = document.getElementById("cpf").value;
   const email = document.getElementById("email").value;
   const password = document.getElementById("senha").value;
 
-  //Requisição HTTP para o eindpoint de cadastro de
+  // requisição http para o endpoint de cadastro de usuário
 
-  fetch("http://10.89.240.105:5000/api/v1/user", {
-    //Realiza uma chamada http para o servidor (a rota definida)
+  fetch("http://10.89.240.3:5000/api/v1/user", {
+    // realiza uma chamada HTTP para o servidor (a rota definida)
     method: "POST",
     headers: {
-      //A requisição será em formato json
+      // a requisição será em formato JSON
       "Content-Type": "application/json",
     },
-    //Transforma os dados do formulario em uma string json para serem enviados no corpo da requisição
-    body: JSON.stringify({ name, cpf, email, password }),
+    // transforma os dados do formulário em uma string json para serem enviados no corpo da requisição
+    body: JSON.stringify({ name, cpf, password, email }),
   })
     .then((response) => {
-      //Tratamento da resposta do servidor/API
+      // tratamento da resposta do servidor / api
       if (response.ok) {
-        //Verifica se a resposta foi bem sucedida(status 2xx)
+        // verifica se a resposta foi bem-sucedida (status: 20*)
         return response.json();
-      }
-      //convertendo o error em formato json
+      } // --- fechamento 'response.ok'
+      // convertendo o erro em formato JSON
       return response.json().then((err) => {
-        //mensagem retornada do servidor,acessada pela chave "error"
+        // mensagem retornada do servidor, acessa pela chave 'error'
         throw new Error(err.error);
-      });
-    }) //fechamento da then(response)
+      }); // --- fechamento 'response error'
+    }) // --- fechamento 'response'
     .then((data) => {
-      //Executa a resposta de sucesso - retorna ao usuario final
+      // executa a resposta de sucesso  - retorna ao usuario final
+      // exibe alerta com o nome do usuario com o nome que acabou de ser cadastrado (front)
 
-      //Exibe um alertapara o usuario final(front) com o nome do usuario que acabou de ser cadastrado
-      alert( data.message);
+      alert(data.message);
       console.log(data.message);
 
-      //Exibe o log no terminal
-      console.log("Usuario criado: ", data.user);
+      // exibe o log no terminal
+      console.log("Usuário Cadastrado: " + data.user);
 
-      //Reseta os campos do formularioapos o sucesso do cadastro
-
+      // limpa os campos do formulario, após o sucesso do cadastro
       document.getElementById("formulario-registro").reset();
-    })
+    }) // --- fechamento 'data'
+    //captura qualquer erro que ocorra durante o processo de requisição/ resposta
     .catch((error) => {
-      //Captura qualquer erro que ocorra durante o processo de requisição/resposta
-
-      //Exibe alrta (front) com o erro processado
+      // exibe alerta no (front) com erro processado
       alert("Erro no cadastro: " + error.message);
-
       console.error("Erro:", error.message);
-    });
-}//fechamento createUser
+    }); // --- fechamento 'catch(error)'
+} // --- function createUser
 
-function getAllUsers(){
-  fetch("http://10.89.240.105:5000/api/v1/user",{
+function getAllUsers() {
+  fetch("http://10.89.240.3:5000/api/v1/user/", {
     method: "GET",
-    headers:{
-      "Content-Type": "application/json",
-    }
-    
+    headers: {
+      "Content-Type": "application/JSON",
+    },
   })
     .then((response) => {
-      if(response.ok){
+      if (response.ok) {
         return response.json();
       }
       return response.json().then((err) => {
@@ -85,20 +83,105 @@ function getAllUsers(){
     })
     .then((data) => {
       const userList = document.getElementById("user-list");
-      userList.innerHTML= "";//Limpa a lista existente
-
-      data.users.forEach((user) =>{
+      userList.innerHTML = " "; // limpa a lista existente
+      data.users.forEach((user) => {
         const listItem = document.createElement("li");
-        listItem.textContent = `Nome: ${user.name},CPF: ${user.cpf}, Email:${user.email}`
+        listItem.textContent = `Nome: ${user.name}, CPF: ${user.cpf}, Email: ${user.email}`;
         userList.appendChild(listItem);
-      })
-
-
-
-
+      });
     })
-    .catch((error) =>{
-      alert("Erro ao obter usuarios" + error.message);
-      console.error("Erro: ",error.message);
+    .catch((error) => {
+      alert("Erro ao obter Usuários" + error.message);
+      console.error("Erro ", error.message);
+    });
+}
+
+function getAllUsersTable() {
+  fetch("http://10.89.240.3:5000/api/v1/user/", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/JSON",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      return response.json().then((err) => {
+        throw new Error(err.error);
+      });
     })
+    .then((data) => {
+      const userList = document.getElementById("user-list-tabela");
+      // Limpa a lista antes de Adicionar novos itens
+      userList.innerHTML = "";
+      // Verifica se há usuario retornados e os adiciona a tabela
+      data.users.forEach((usuario) => {
+        // Cria uma nova linha
+        const tr = document.createElement("tr");
+        // Cria células para nome, CPF e E-mail
+        const tdName = document.createElement("td");
+        tdName.textContent = usuario.name;
+        tr.appendChild(tdName);
+
+        const tdCpf = document.createElement("td");
+        tdCpf.textContent = usuario.cpf;
+        tr.appendChild(tdCpf);
+
+        const tdEmail = document.createElement("td");
+        tdEmail.textContent = usuario.email;
+        tr.appendChild(tdEmail);
+
+        userList.appendChild(tr);
+      });
+    })
+    .catch((error) => {
+      alert("Erro ao obter usuários: " + error.message);
+      console.error("Erro: ", error.message);
+    });
+}
+
+function getAllOrgsTable() {
+  fetch("http://10.89.240.3:5000/api/v1/organizador/", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/JSON",
+    },
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      }
+      return response.json().then((err) => {
+        throw new Error(err.error);
+      });
+    })
+    .then((data) => {
+      const orgList = document.getElementById("org-list-tabela");
+      // Limpa a lista antes de Adicionar novos itens
+      orgList.innerHTML = "";
+      // Verifica se há usuario retornados e os adiciona a tabela
+      data.organizadores.forEach((organizador) => {
+        // Cria uma nova linha
+        const tr = document.createElement("tr");
+        // Cria células para nome, CPF e E-mail
+        const tdNome = document.createElement("td");
+        tdNome.textContent = organizador.nome;
+        tr.appendChild(tdNome);
+
+        const tdTelefone = document.createElement("td");
+        tdTelefone.textContent = organizador.telefone;
+        tr.appendChild(tdTelefone);
+
+        const tdEmail = document.createElement("td");
+        tdEmail.textContent = organizador.email;
+        tr.appendChild(tdEmail);
+
+        orgList.appendChild(tr);
+      });
+    })
+    .catch((error) => {
+      alert("Erro ao obter usuários: " + error.message);
+      console.error("Erro: ", error.message);
+    });
 }
