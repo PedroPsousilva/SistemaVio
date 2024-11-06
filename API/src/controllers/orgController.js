@@ -18,7 +18,7 @@ module.exports = class orgController {
       return res.status(400).json({ error: "Email inválido. Deve conter @" });
     } else {
       // Construção da query INSERT
-      const query = `INSERT INTO organizador (telefone, senha, email, name) VALUES(
+      const query = `INSERT INTO organizador (telefone, senha, email, nome) VALUES(
       '${telefone}',
       '${senha}',
       '${email}',
@@ -43,7 +43,7 @@ module.exports = class orgController {
           } else {
             return res
               .status(201)
-              .json({ message: "Usuário cadastrado com sucesso" });
+              .json({ message: "Organizador cadastrado com sucesso" });
           }
         });
       } catch (error) {
