@@ -10,6 +10,10 @@ module.exports = class ingressoController{
             return res.status(400).json({error: "Todos os campos devem ser preenchidos"})
         }
 
+        if(tipo.toLowerCase() != "vip" && tipo.toLowerCase() != "pista"){
+            return res.status(400).json({error: "O tipo de ingresso não é compativel"});
+        }
+
         const query = `insert into ingresso (preco, tipo, fk_id_evento)values ( ?, ?, ?)`;
         const values = [preco, tipo, fk_id_evento];
         try{
@@ -52,6 +56,10 @@ module.exports = class ingressoController{
         //Validação genérica de todos atributos
         if(!id_ingresso||!preco|| !tipo || !fk_id_evento){
             return res.status(400).json({error: "Todos os campos devem ser preenchidos"})
+        }
+
+        if(tipo.toLowerCase() != "vip" && tipo.toLowerCase() != "pista"){
+            return res.status(400).json({error: "O tipo de ingresso não é compativel"});
         }
 
         const query = `update ingresso set preco=?, tipo=?,  fk_id_evento=? where id_ingresso=?`;
