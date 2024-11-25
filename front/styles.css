@@ -1,5 +1,4 @@
-/* Estilos globais aplicados a todos os elementos da página */
-* {
+Estilos globais aplicados a todos os elementos da página * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -77,6 +76,100 @@ main section {
   margin-bottom: 40px; /* Espaçamento inferior entre as seções */
 }
 
+main #lista-usuarios #user-list {
+  color: whitesmoke;
+  background-color: rgb(63, 167, 63);
+  padding: 10px;
+  border-radius: 20px;
+  display: flex; /* Usa flexbox para alinhar a logo e o título */
+  align-items: center; /* Alinha verticalmente os itens */
+  justify-content: center; /* Centraliza os itens horizontalmente */
+  flex-direction: column;
+}
+
+main #lista-usuarios #user-list li{
+  color: whitesmoke;
+  padding: 10px;
+  border-radius: 20px;
+  display: flex; /* Usa flexbox para alinhar a logo e o título */
+  align-items: center; /* Alinha verticalmente os itens */
+  justify-content: center; /* Centraliza os itens horizontalmente */
+  flex-direction: column;
+}
+
+main #lista-usuarios h2 {
+  color: whitesmoke;
+  background-color: green;
+  padding: 10px 2px;
+  border-radius: 20px;
+  display: flex; /* Usa flexbox para alinhar a logo e o título */
+  align-items: center; /* Alinha verticalmente os itens */
+  justify-content: center; /* Centraliza os itens horizontalmente */
+}
+
+main section h2{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#user-list {
+  list-style: none; /* Remove os marcadores da lista */
+  padding: 0; /* Remove o preenchimento padrão */
+  max-width: 600px; /* Define uma largura máxima para a lista */
+  margin: 20px auto; /* Centraliza a lista horizontalmente e adiciona espaço acima e abaixo */
+  background-color: #fff; /* Cor de fundo branca */
+  border-radius: 8px; /* Bordas arredondadas */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
+}
+
+/* Estilo para o título da seção de usuários */
+section h2 {
+  color: #000000; /* Cor específica para o título */
+  margin-bottom: 15px; /* Espaçamento inferior */
+}
+
+/* Estilo de cada item da lista de usuários */
+#user-list li {
+  padding: 10px; /* Espaçamento interno para os itens da lista */
+  border-bottom: 1px solid #ddd; /* Borda inferior cinza clara entre os itens */
+}
+
+/* Estilo do último item da lista */
+#user-list li:last-child {
+  border-bottom: none; /* Remove a borda do último item */
+}
+
+/* Estilo ao passar o mouse sobre os itens da lista */
+#user-list li:hover {
+  background-color: #4ccc4e; /* Altera a cor de fundo ao passar o mouse */
+}
+
+table {
+  width: 100%; /* Largura total da tabela */
+  border-collapse: collapse; /* Remove espaços entre bordas */
+  margin-top: 20px; /* Espaçamento superior */
+}
+
+th, td {
+  border: 1px solid #ddd; /* Borda cinza clara */
+  padding: 8px; /* Espaçamento interno */
+  text-align: left; /* Alinhamento à esquerda */
+}
+
+th {
+  background-color: #4caf50; /* Cor de fundo para cabeçalho */
+  color: white; /* Cor do texto no cabeçalho */
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* Cor de fundo para linhas pares */
+}
+
+tr:hover {
+  background-color: #ddd; /* Cor de fundo ao passar o mouse */
+}
+
 /* Seletor de ID para a seção 'home' */
 #home {
   background-color: #afd8de; /* Cor de fundo para destacar a seção 'home' */
@@ -113,75 +206,4 @@ footer {
   width: 100%; /* Faz com que o rodapé ocupe toda a largura */
   position: absolute; /* Posiciona o rodapé de forma absoluta */
   bottom: 0; /* Posiciona o rodapé na parte inferior da página */
-}
-
-#user-list{
-  
-  text-align: center; 
-  color:black; /* Cor específica para o título da seção 'home' */
-  font-weight: bold; /* Texto em negrito */
-}
-h2-ul{
-  justify-content: center;
-  color: #afd8de;
-  text-align: center;
-
-
-}
-/*Tabela*/
-table {
-  width: 100%; /* Largura total da tabela */
-  border-collapse: collapse; /* Remove espaços entre bordas */
-  margin-top: 20px; /* Espaçamento superior */
-}
-
-th, td {
-  border: 1px solid #ddd; /* Borda cinza clara */
-  padding: 8px; /* Espaçamento interno */
-  text-align: left; /* Alinhamento à esquerda */
-}
-
-th {
-  background-color: #4caf50; /* Cor de fundo para cabeçalho */
-  color: white; /* Cor do texto no cabeçalho */
-}
-
-tr:nth-child(even) {
-  background-color: #f2f2f2; /* Cor de fundo para linhas pares */
-}
-
-tr:hover {
-  background-color: #ddd; /* Cor de fundo ao passar o mouse */
-}
-/* Estilos da seção de usuários cadastrados */
-#user-list {
-  list-style: none; /* Remove os marcadores da lista */
-  padding: 0; /* Remove o preenchimento padrão */
-  max-width: 600px; /* Define uma largura máxima para a lista */
-  margin: 20px auto; /* Centraliza a lista horizontalmente e adiciona espaço acima e abaixo */
-  background-color: #fff; /* Cor de fundo branca */
-  border-radius: 8px; /* Bordas arredondadas */
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra para dar profundidade */
-}
-
-/* Estilo para o título da seção de usuários */
-section h2 {
-  color: #00796b; /* Cor específica para o título */
-  margin-bottom: 15px; /* Espaçamento inferior */
-}
-
-/* Estilo de cada item da lista de usuários */
-#user-list li {
-  padding: 10px; /* Espaçamento interno para os itens da lista */
-  border-bottom: 1px solid #ddd; /* Borda inferior cinza clara entre os itens */
-}
-
-/* Estilo do último item da lista */
-#user-list li:last-child {
-  border-bottom: none; /* Remove a borda do último item */
-}
-
-/* Estilo ao passar o mouse sobre os itens da lista */
-#user-list li:hover {
-  background-color: #f1f1f1; /* Altera a cor de fundo ao passar o mouse */
 }

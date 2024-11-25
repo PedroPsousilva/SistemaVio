@@ -1,36 +1,30 @@
-const router = require('express').Router()
+const router = require("express").Router();
 
-const { route } = require('..');
-const userController = require("../controllers/userController")
-const orgController = require("../controllers/orgController")
-const eventoController = require('../controllers/eventoController')
-const ingressoController = require('../controllers/ingressoController')
+const userController = require("../controllers/userController");
+const orgController = require("../controllers/orgController");
+const eventoController = require("../controllers/eventoController");
+const ingController = require("../controllers/ingController");
 
-router.post('/user', userController.createUser);
-//router.post('user/login', userController.postLogin);
-router.get('/user', userController.getAllUsers);
-//router.get('/user/:cpf', userController.gerUserById); 
-router.put('/user', userController.updateUser);
-router.delete('/user/:id', userController.deleteUser);
+router.post("/user", userController.createUser);
+router.get("/user", userController.getAllUsers);
+router.put("/user", userController.updateUser);
+router.delete("/user/:id_usuario", userController.deleteUser);
 
-router.post('/organizador', orgController.createOrganizador);
-router.get('/organizador', orgController.getAllOrganizadores);
-router.put('/organizador', orgController.updateOrganizador);
-router.delete('/organizador/:id', orgController.deleteOrganizador);
+router.post("/org", orgController.createOrg);
+router.get("/org", orgController.getAllOrgs);
+router.put("/org", orgController.updateOrg);
+router.delete("/org/:id_organizador", orgController.deleteOrg);
 
-//rotas eventoController
-router.post('/evento', eventoController.createEvento);
-router.get('/evento', eventoController.getAllEventos);
-router.put('/evento', eventoController.updateEvento);
-router.delete('/evento/:id', eventoController.deleteEvento);
-router.get('/evento/data', eventoController.getEventosPorData);
-router.get('/evento/Proximo7',eventoController.getEventosproximos7dias);
+router.post("/evento", eventoController.createEvento);
+router.get("/evento", eventoController.getAllEventos);
+router.get("/evento/data", eventoController.getEventosPorData);
+router.get("/evento/:data", eventoController.getEventosPorData7Dias);
+router.put("/evento", eventoController.updateEvento);
+router.delete("/evento/:id_evento", eventoController.deleteEvento);
 
-//rotas ingressoController
-router.post('/ingresso', ingressoController.createIngresso);
-router.get('/ingresso', ingressoController.getAllingresso);
-router.put('/ingresso', ingressoController.updateIngresso);
-router.delete('/ingresso/:id', ingressoController.deleteIngresso);
+router.post("/ing", ingController.createIng);
+router.get("/ing", ingController.getAllIngs);
+router.put("/ing", ingController.updateIng);
+router.delete("/ing/:id_ingresso", ingController.deleteIng);
 
-
-module.exports = router
+module.exports = router;
